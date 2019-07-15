@@ -1,0 +1,11 @@
+*.exe
+/.ideal
+*.exe*
+.idea
+
+# 忽略 go.sum
+go.sum
+
+#忽略测试文件
+test/
+testData/
