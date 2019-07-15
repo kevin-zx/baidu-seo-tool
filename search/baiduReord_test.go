@@ -1,4 +1,4 @@
-package baidu
+package search
 
 import (
 	"fmt"

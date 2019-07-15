@@ -1,5 +1,5 @@
 // 这个类是获取百度内容用的
-package baidu
+package search
 
 import (
 	"fmt"

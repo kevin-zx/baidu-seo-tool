@@ -3,7 +3,7 @@ package link
 import (
 	"errors"
 	"fmt"
-	"github.com/kevin-zx/baidu-seo-tool/baidu"
+	"github.com/kevin-zx/baidu-seo-tool/search"
 	"net/url"
 	"strings"
 )
@@ -29,7 +29,7 @@ func IsRecord(link string) (recordFlag bool, err error) {
 }
 
 func crawlerRecord2(query string) (string, error) {
-	return baidu.GetBaiduPCSearchHtml(query, 1)
+	return search.GetBaiduPCSearchHtml(query, 1)
 }
 
 const siteTemplate = "site:%s inurl:%s"

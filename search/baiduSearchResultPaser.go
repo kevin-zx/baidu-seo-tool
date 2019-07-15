@@ -1,5 +1,5 @@
 // 对百度搜索结果进行分析
-package baidu
+package search
 
 import (
 	"fmt"

@@ -1,4 +1,4 @@
-package baidu
+package search
 
 import (
 	"github.com/kevin-zx/http-util"
