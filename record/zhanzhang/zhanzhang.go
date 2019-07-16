@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/kevin-zx/http-util"
-	"log"
 	"strings"
 	"time"
 )
@@ -18,20 +17,20 @@ type CommitResult struct {
 	NotValid    []string `json:"not_valid"`
 }
 
-func Commit(zhanZhangToken string, domain string, urls []string) (*CommitResult, error) {
-	commitUrl := fmt.Sprintf(zhanzhangBaseUrl, domain, zhanZhangToken)
-	log.Println(commitUrl)
+func Commit(zhanzhangToken string, domain string, urls []string) (*CommitResult, error) {
+	commitUrl := fmt.Sprintf(zhanzhangBaseUrl, domain, zhanzhangToken)
+	//log.Println(commitUrl)
 	header := map[string]string{}
 	zhanzhangReBack, err := http_util.GetWebConFromUrlWithAllArgs(commitUrl, header, "POST", []byte(strings.Join(urls, "\n")), time.Second*100)
 	if err != nil {
 		return nil, err
 	}
-	var zhangZhangResult CommitResult
-	log.Println(zhanzhangReBack)
-	err = json.Unmarshal([]byte(zhanzhangReBack), &zhangZhangResult)
+	var zhanZhangResult CommitResult
+	//log.Println(zhanzhangReBack)
+	err = json.Unmarshal([]byte(zhanzhangReBack), &zhanZhangResult)
 	if err != nil {
 		return nil, err
 	}
-	//log.Printf("commit %d urls to site_base %s, success %d, faild %d, remain %d/n", len(urls), domain, zhangZhangResult.Success, len(urls)-zhangZhangResult.Success, zhangZhangResult.Remain)
-	return &zhangZhangResult, nil
+	//log.Printf("commit %d urls to site_base %s, success %d, faild %d, remain %d/n", len(urls), domain, zhanZhangResult.Success, len(urls)-zhanZhangResult.Success, zhanZhangResult.Remain)
+	return &zhanZhangResult, nil
 }
