@@ -7,7 +7,7 @@ import (
 )
 
 func TestGetBaiduMobileResultsByKeyword(t *testing.T) {
-	rs, err := GetBaiduMobileResultsByKeyword("测试", 1)
+	rs, err := GetBaiduMobileResultsByKeyword("石家庄畅销滤筒除尘器哪家好", 1)
 	if err != nil {
 		panic(err)
 	}
