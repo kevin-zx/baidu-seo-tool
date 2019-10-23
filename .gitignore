@@ -8,4 +8,5 @@ go.sum
 
 #忽略测试文件
 test/
+test2/
 testData/

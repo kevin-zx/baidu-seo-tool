@@ -11,5 +11,11 @@ func TestParseBaiduPcSearchInfoFromHtml(t *testing.T) {
 		panic(err)
 	}
 	bi, err := ParseBaiduPcSearchInfoFromHtml(searhHTML)
-	fmt.Println(bi)
+	if err != nil {
+		panic(err)
+	}
+	for _, sr := range *bi.SearchResults {
+
+		fmt.Println(sr.CacheUrl)
+	}
 }

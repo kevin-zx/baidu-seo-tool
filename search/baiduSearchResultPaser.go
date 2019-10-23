@@ -53,6 +53,7 @@ type SearchResult struct {
 	TitleMatchWords            []string `json:"title_match_words"`
 	BaiduDescriptionMatchWords []string `json:"baidu_description_match_words"` //百度显示的description的飘红字
 	BaiduDescription           string   `json:"baidu_description"`             // 百度显示的description
+	CacheUrl                   string   `json:"cache_url"`
 }
 
 func (sr *SearchResult) GetPCRealUrl() error {
@@ -162,6 +163,14 @@ func ParseBaiduPCSearchResultHtml(html string) (*[]SearchResult, error) {
 			resItem.DisplayUrl = strings.TrimSpace(displayUrlEle.Text())
 		}
 
+		// cacheUrl
+		cacheUrlElem := searchResultElement.Find("div.f13 a.m")
+		if strings.Contains(cacheUrlElem.Text(), "百度快照") {
+			href, exist := cacheUrlElem.Attr("href")
+			if exist {
+				resItem.CacheUrl = href
+			}
+		}
 		results = append(results, resItem)
 	})
 
