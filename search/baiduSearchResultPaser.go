@@ -130,11 +130,21 @@ func ParseBaiduPCSearchResultHtml(html string) (*[]SearchResult, error) {
 		}
 
 		// title相关
-		baiduUrl, ok := searchResultElement.Find("h3.t>a").Attr("href")
+		fmt.Println(index)
+		var titleElement *goquery.Selection
+		searchResultElement.Find("h3.t>a").Each(func(_ int, te *goquery.Selection) {
+			if href, ok := te.Attr("href"); !ok || href == "" {
+				return
+			}
+			titleElement = te
+		})
+		if titleElement == nil {
+			return
+		}
+		baiduUrl, ok := titleElement.Attr("href")
 		if !ok {
 			return
 		} else {
-			titleElement := searchResultElement.Find("h3.t>a")
 			resItem.Title = titleElement.Text()
 			titleElement.Find("em").Each(func(_ int, redElement *goquery.Selection) {
 				if redElement.Text() != "..." {
@@ -146,14 +156,17 @@ func ParseBaiduPCSearchResultHtml(html string) (*[]SearchResult, error) {
 
 		// description相关
 		abstractElement := searchResultElement.Find(".c-abstract")
-		if abstractElement != nil {
+		//fmt.Println(goquery.OuterHtml(searchResultElement))
+		resItem.BaiduDescription = abstractElement.Text()
+		if resItem.BaiduDescription == "" {
+			abstractElement = searchResultElement.Find(".op-vmp-zxenterprise-contianer")
 			resItem.BaiduDescription = abstractElement.Text()
-			abstractElement.Find("em").Each(func(_ int, redElement *goquery.Selection) {
-				if redElement.Text() != "..." {
-					resItem.BaiduDescriptionMatchWords = append(resItem.BaiduDescriptionMatchWords, redElement.Text())
-				}
-			})
 		}
+		abstractElement.Find("em").Each(func(_ int, redElement *goquery.Selection) {
+			if redElement.Text() != "..." {
+				resItem.BaiduDescriptionMatchWords = append(resItem.BaiduDescriptionMatchWords, redElement.Text())
+			}
+		})
 
 		// 底部url相关
 		displayUrlEle := searchResultElement.Find(".c-showurl")

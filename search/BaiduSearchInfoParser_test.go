@@ -6,7 +6,7 @@ import (
 )
 
 func TestParseBaiduPcSearchInfoFromHtml(t *testing.T) {
-	searhHTML, err := GetBaiduPCSearchHtml("快餐陪送", 1)
+	searhHTML, err := GetBaiduPCSearchHtml("承德众鼎致远电气安装有限公司", 1)
 	if err != nil {
 		panic(err)
 	}
@@ -16,6 +16,6 @@ func TestParseBaiduPcSearchInfoFromHtml(t *testing.T) {
 	}
 	for _, sr := range *bi.SearchResults {
 
-		fmt.Println(sr.CacheUrl)
+		fmt.Println(sr.BaiduDescription)
 	}
 }
