@@ -130,7 +130,7 @@ func ParseBaiduPCSearchResultHtml(html string) (*[]SearchResult, error) {
 		}
 
 		// title相关
-		fmt.Println(index)
+		//fmt.Println(index)
 		var titleElement *goquery.Selection
 		searchResultElement.Find("h3.t>a").Each(func(_ int, te *goquery.Selection) {
 			if href, ok := te.Attr("href"); !ok || href == "" {
