@@ -7,7 +7,11 @@ import (
 )
 
 func TestGetBaiduMobileResultsByKeyword(t *testing.T) {
-	rs, err := GetBaiduMobileResultsByKeyword("石家庄畅销滤筒除尘器哪家好", 1)
+	wec, err := GetBaiduPCSearchHtmlWithRNAndTimeDayInterval("石家庄", 1, 50, "2019-10-26")
+	if err != nil {
+		panic(err)
+	}
+	rs, err := ParseBaiduPCSearchResultHtml(wec)
 	if err != nil {
 		panic(err)
 	}
