@@ -2,14 +2,23 @@ package main
 
 import (
 	"fmt"
-	http_util "github.com/kevin-zx/http-util"
-	"time"
+	"github.com/kevin-zx/baidu-seo-tool/search"
 )
 
 func main() {
-	con, err := http_util.GetWebConFromUrlWithAllArgs("http://www.szcppf.com/list-4-1.html", map[string]string{"User-Agent": "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"}, "GET", nil, time.Second*10)
+	srs, err := search.GetBaiduPcResultsByKeyword("site:qichacha.com 电话 18852997668", 10, 10)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(con)
+	for _, sr := range *srs {
+		fmt.Printf("%v\n", sr)
+	}
+
+	srs, err = search.GetBaiduMobileResultsByKeyword("site:qichacha.com 18852997668", 1)
+	if err != nil {
+		panic(err)
+	}
+	for _, sr := range *srs {
+		fmt.Printf("%v\n", sr)
+	}
 }

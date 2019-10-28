@@ -25,6 +25,19 @@ func DecodeBaiduEncURL(baiduUrl string) string {
 			} else {
 				return strings.Split(part1[1], "\")},timeout")[0]
 			}
+		} else if strings.Contains(h, `JSON.parse(localStorage.getItem("tc_time_log")`) {
+			ps := strings.Split(h, "\n")
+			for _, p := range ps {
+				if strings.Contains(p, "window.location.replace(") && strings.Contains(p, ")") {
+					start := strings.Index(p, `("`)
+					end := strings.LastIndex(p, `")`)
+					if end > start+1 && (start > 0 && end > 0) {
+						//u :=strings.Replace(p[start+1:end],`"`,"",-1)
+						//u =
+						return p[start+2 : end]
+					}
+				}
+			}
 		} else {
 			return response.Request.URL.String()
 		}
