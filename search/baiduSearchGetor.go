@@ -111,6 +111,7 @@ func escapeKeyword(keyword string) string {
 	return keyword
 }
 
+// 2019-10-29
 func GetBaiduPcResultsByKeywordAndSearchDay(keyword string, page int, rn int, startDate string) (baiduResults *[]SearchResult, err error) {
 	webc, err := GetBaiduPCSearchHtmlWithRNAndTimeDayInterval(keyword, page, rn, startDate)
 	if err != nil {

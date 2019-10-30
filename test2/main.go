@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	srs, err := search.GetBaiduPcResultsByKeyword("site:qichacha.com 电话 18852997668", 10, 10)
+	srs, err := search.GetBaiduPcResultsByKeyword("电话", 1, 10)
 	if err != nil {
 		panic(err)
 	}
@@ -14,7 +14,7 @@ func main() {
 		fmt.Printf("%v\n", sr)
 	}
 
-	srs, err = search.GetBaiduMobileResultsByKeyword("site:qichacha.com 18852997668", 1)
+	srs, err = search.GetBaiduMobileResultsByKeyword("电话2", 1)
 	if err != nil {
 		panic(err)
 	}
