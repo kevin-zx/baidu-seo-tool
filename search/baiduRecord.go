@@ -20,13 +20,20 @@ func GetPCRecordFromDomain(domain string) (int, error) {
 
 	if recordContainer != nil && recordContainer.Size() > 0 {
 		recordStr := strings.Replace(recordContainer.Text(), ",", "", -1)
+		recordStr = strings.Replace(recordStr, "亿", "", -1)
+		if strings.Contains(recordStr, "万") {
+			recordStr = strings.Replace(recordStr, "万", "", -1) + "0000"
+		}
 		record, err := strconv.Atoi(recordStr)
 		return record, err
 	}
 	siteTipsRecord := doc.Find("div.c-border.c-row.site_tip b")
 	if siteTipsRecord != nil && siteTipsRecord.Size() > 0 {
-		recordStr := strings.Replace(siteTipsRecord.Text(), "找到相关结果数约", "", 1)[0:1]
+		//fmt.Println(siteTipsRecord.Text())
+		recordStr := strings.Replace(siteTipsRecord.Text(), "找到相关结果数约", "", 1)
+
 		recordStr = strings.Replace(recordStr, ",", "", -1)
+		recordStr = strings.Replace(recordStr, "个", "", -1)
 		record, err := strconv.Atoi(recordStr)
 		return record, err
 	}
