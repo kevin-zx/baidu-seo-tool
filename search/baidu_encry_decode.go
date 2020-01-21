@@ -24,16 +24,16 @@ func GetWebconAndRealUrlFromBaiduUrl(baiduUrl string) (response *http.Response, 
 	//fmt.Println(baiduUrl)
 	realURL := ""
 	if response.StatusCode == 200 {
-		h, _ := http_util.ReadContentFromResponse(response, "")
-		if strings.Contains(h, "window.opener&&window.opener.bds&&window.opener.bds.pdc&&window.opener.bds.pdc.sendLinkLog") {
-			part1 := strings.Split(h, "window.location.replace(\"")
+		webCon, _ = http_util.ReadContentFromResponse(response, "")
+		if strings.Contains(webCon, "window.opener&&window.opener.bds&&window.opener.bds.pdc&&window.opener.bds.pdc.sendLinkLog") {
+			part1 := strings.Split(webCon, "window.location.replace(\"")
 			if len(part1) < 2 {
 				return nil, "", errors.New("can't go real page")
 			} else {
 				realURL = strings.Split(part1[1], "\")},timeout")[0]
 			}
-		} else if strings.Contains(h, `JSON.parse(localStorage.getItem("tc_time_log")`) {
-			ps := strings.Split(h, "\n")
+		} else if strings.Contains(webCon, `JSON.parse(localStorage.getItem("tc_time_log")`) {
+			ps := strings.Split(webCon, "\n")
 			for _, p := range ps {
 				if strings.Contains(p, "window.location.replace(") && strings.Contains(p, ")") {
 					start := strings.Index(p, `("`)
