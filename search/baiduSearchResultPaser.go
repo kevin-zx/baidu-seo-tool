@@ -344,12 +344,12 @@ func ParseBaiduMobileSearchResultHtml(html string, page int) (*[]SearchResult, e
 		}
 		dataLogJson, err := simplejson.NewFromReader(strings.NewReader(strings.Replace(data_log, "'", "\"", -1)))
 		if err != nil {
-			fmt.Printf("data_log json 化出错，data_log: %s, errinfo:%s\n", data_log, err.Error())
+			//fmt.Printf("data_log json 化出错，data_log: %s, errinfo:%s\n", data_log, err.Error())
 			return
 		}
 		mu, err := dataLogJson.Get("mu").String()
 		if err != nil {
-			fmt.Printf("data_log json 化出错，data_log: %s, errinfo:%s\n", data_log, err.Error())
+			//fmt.Printf("data_log json 化出错，data_log: %s, errinfo:%s\n", data_log, err.Error())
 			return
 		}
 		//title 处理
